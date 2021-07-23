@@ -15,7 +15,7 @@ jobs: # ワークフロー内で実行されるjobを定期
 
     strategy: # ワークフローを特定にパラメータの組み合わせで繰り返し実行する「マトリクス」を定義する
       matrix:
-        node-version: [12.x, 14.x, 16.x] # nodeが12系、14系、16系でそれぞれワークフローが実行される
+        node-version: [16.x] # nodeが12系、14系、16系でそれぞれワークフローが実行される
         # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
 
     steps: # ジョブで実行されるステップを定義 users: アクションを呼び出す run: コマンドを実行
