@@ -1,0 +1,19 @@
+name: Slack
+
+on:
+  workflow_run: # ①ワークフローの実行によって発生するイベント
+    workflows: ["Node.js CI"] # ここに書いたワークフローの実行により新しくワークフローを開始できる
+    types: # ② 特定のタイミングでワークフローを実行する
+      - completed # requested: ワークフローの開始が要求された時に発生する
+      # completed: ワークフローが完了した時に発生する
+
+jobs:
+  slack:
+    if: github.event.workflow_run.conclusion == 'failure' # ③ if: 指定した条件を満たした時だけジョブを実行する
+    # github.event.workflow_run.conclusion == 'failure': ワークフローが失敗した時だけジョブが実行
+    runs-on: ubuntu-latest
+    steps:
+      - uses: 雄貴(yuki)/action-slack-workflow_run@v1.0.0 # ④slackに通知するアクション
+        with:
+          slack-webhook-url: ${{secrets.SLACK_WEBHOOK_URL}} # ⑤
+          # https://qiita.com/Daara_y/items/b23bce4c0a2f763451b1#slack%E3%81%AEwebhookurl%E3%82%92%E5%8F%96%E5%BE%97%E3%81%99%E3%82%8B
