@@ -13,7 +13,7 @@ jobs:
     # github.event.workflow_run.conclusion == 'failure': ワークフローが失敗した時だけジョブが実行
     runs-on: ubuntu-latest
     steps:
-      - uses: 雄貴(yuki)/action-slack-workflow_run@v1.0.0 # ④slackに通知するアクション
+      - uses: yuki/action-slack-workflow_run@v1.0.0 # ④slackに通知するアクション
         with:
           slack-webhook-url: ${{secrets.SLACK_WEBHOOK_URL}} # ⑤
           # https://qiita.com/Daara_y/items/b23bce4c0a2f763451b1#slack%E3%81%AEwebhookurl%E3%82%92%E5%8F%96%E5%BE%97%E3%81%99%E3%82%8B
