@@ -12,21 +12,16 @@ jobs:
     if: github.event.workflow_run.conclusion == 'failure' # ③ if: 指定した条件を満たした時だけジョブを実行する
     # github.event.workflow_run.conclusion == 'failure': ワークフローが失敗した時だけジョブが実行
     runs-on: ubuntu-latest
-    # steps:
+    steps:
+      uses: rtCamp/action-slack-notify@v2
+      env:
+        SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK_URL }}
+        SLACK_USERNAME: My Alert
+        SLACK_ICON_EMOJI: ":github:"
+        SLACK_COLOR: danger
+        SLACK_TITLE: タイトル
+        SLACK_MESSAGE: メッセージ
     #   - uses: miyajin/action-slack-workflow_run@v1.0.0 # ④slackに通知するアクション
     #     with:
     #       slack-webhook-url: ${{secrets.SLACK_WEBHOOK_URL}} # ⑤
-    #       # https://qiita.com/Daara_y/items/b23bce4c0a2f763451b1#slack%E3%81%AEwebhookurl%E3%82%92%E5%8F%96%E5%BE%97%E3%81%99%E3%82%8B
-    steps:
-      - name: "Send Notification"
-        run: |
-          jq -n '{
-            attachments: [{
-              pretext: "CIでエラーが発生しました",
-              color: "good",
-              title: "${{ github.event.pull_request.title }}",
-              title_link: "${{ github.event.pull_request.html_url }}"
-            }]
-          }' | curl -H 'Content-Type: application/json' -d @- ${{ secrets.SLACK_WEBHOOK }}
-
-# https://furusax0621.hatenablog.com/entry/2020/03/29/193336
+    # #       # https://qiita.com/Daara_y/items/b23bce4c0a2f763451b1#slack%E3%81%AEwebhookurl%E3%82%92%E5%8F%96%E5%BE%97%E3%81%99%E3%82%8B
