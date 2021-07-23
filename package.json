@@ -1,0 +1,23 @@
+{
+  "name": "github-actions-nodejs-npm-sample",
+  "version": "1.0.0",
+  "description": "GithubActionsの練習 (npmを用いる)",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/YukiOnishi1129/github-actions-nodejs-npm-sample.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/YukiOnishi1129/github-actions-nodejs-npm-sample/issues"
+  },
+  "homepage": "https://github.com/YukiOnishi1129/github-actions-nodejs-npm-sample#readme",
+  "devDependencies": {
+    "jest": "^27.0.6"
+  }
+}
