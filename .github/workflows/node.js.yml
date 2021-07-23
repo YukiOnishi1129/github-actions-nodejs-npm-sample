@@ -31,7 +31,7 @@ jobs: # ワークフロー内で実行されるjobを定期
         # ::set-output name=key::value  keyで指定したキーにvalueで指定した値をステップのアウトプットとして保存できる
         # npm config get cache はnpm のキャッシュディレクトリを返すコマンド
       - name: Cache NPM
-        uses: action/cache@v2 # keyで指定したキーに完全一致するキャッシュが存在するときは、pathで指定したファイルパスに復元される
+        uses: actions/cache@v2 # keyで指定したキーに完全一致するキャッシュが存在するときは、pathで指定したファイルパスに復元される
         # またジョブ終了時にpathで指定したファイルパスの内容が、keyで指定したキーでキャッシュとして保存される
         # キャッシュが保存されるのはジョブ成功時のみ
         with:
