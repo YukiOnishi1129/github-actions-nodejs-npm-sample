@@ -13,14 +13,30 @@ jobs:
     # github.event.workflow_run.conclusion == 'failure': ワークフローが失敗した時だけジョブが実行
     runs-on: ubuntu-latest
     steps:
-      - uses: rtCamp/action-slack-notify@v2
+
+    # https://zenn.dev/shonansurvivors/articles/fab832f7bfa8cebac24f
+     - name: Notify CI Error
+        uses: 8398a7/action-slack@v3
+        with:
+          status: ${{ job.status }}
+          author_name: プルリクエスト時のCI処理結果
+          fields: repo,message,commit,author,action,job,took,eventName,ref,workflow
+          mention: 'yuki' # 追加
+          if_mention: failure # 追加
         env:
-          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK_URL }}
-          SLACK_USERNAME: My Alert
-          SLACK_ICON_EMOJI: ":github:"
-          SLACK_COLOR: danger
-          SLACK_TITLE: タイトル
-          SLACK_MESSAGE: メッセージ
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+        if: always()
+
+    # https://neos21.net/blog/2021/02/19-01.html
+    #   - uses: rtCamp/action-slack-notify@v2
+    #     env:
+    #       SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK_URL }}
+    #       SLACK_USERNAME: My Alert
+    #       SLACK_ICON_EMOJI: ":github:"
+    #       SLACK_COLOR: danger
+    #       SLACK_TITLE: タイトル
+    #       SLACK_MESSAGE: メッセージ
     #   - uses: miyajin/action-slack-workflow_run@v1.0.0 # ④slackに通知するアクション
     #     with:
     #       slack-webhook-url: ${{secrets.SLACK_WEBHOOK_URL}} # ⑤
