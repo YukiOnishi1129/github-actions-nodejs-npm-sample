@@ -44,3 +44,8 @@ jobs: # ワークフロー内で実行されるjobを定期
       - run: npm ci
       - run: npm run build --if-present
       - run: npm test
+      - uses: actions/upload-artifact@v2
+        # pathで指定したファイルやディレクトリが、nameで指定した名前でアーキファクトとして保存される
+        with:
+          name: test-coverage-${{matrix.node-version}}
+          path: coverage
