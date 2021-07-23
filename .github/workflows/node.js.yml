@@ -28,7 +28,7 @@ jobs: # ワークフロー内で実行されるjobを定期
         id: npm-cache # ②後のステップからコンテキスト経由でステップのアウトプットにアクセスするために使う
         # ${{steps.npm-cache.outputs.dir}} で保存したコマンドを実行できる (①で保存したもの)
         run: |
-          echo "::set-output name=dir::${npm config get cache}"
+          echo "::set-output name=dir::$(npm config get cache)"
         # ①特定のフォーマットで文字列を出力することでコマンド実行できる
         # ::set-output name=key::value  keyで指定したキーにvalueで指定した値をステップのアウトプットとして保存できる
         # npm config get cache はnpm のキャッシュディレクトリを返すコマンド
