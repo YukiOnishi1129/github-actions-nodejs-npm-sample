@@ -1,22 +1,21 @@
 name: Mark stale issues and pull requests
 
 on:
-  schedule:
-  - cron: '40 5 * * *'
+  schedule: # ワークフローを定期実行する設定
+    - cron: "40 5 * * *" #"分 時 日 月 曜日"
 
 jobs:
   stale:
-
     runs-on: ubuntu-latest
     permissions:
       issues: write
       pull-requests: write
 
     steps:
-    - uses: actions/stale@v3
-      with:
-        repo-token: ${{ secrets.GITHUB_TOKEN }}
-        stale-issue-message: 'Stale issue message'
-        stale-pr-message: 'Stale pull request message'
-        stale-issue-label: 'no-issue-activity'
-        stale-pr-label: 'no-pr-activity'
+      - uses: actions/stale@v3 # actions/staleを呼び出す 最終更新日から60日以上(デフォルト)経過したIssueとPRに対し実行
+        with:
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
+          stale-issue-message: "Stale issue message" # issueにコメント
+          stale-pr-message: "Stale pull request message" # PRにコメント
+          stale-issue-label: "no-issue-activity" # issueに「no-issue-activity」ラベルを付ける このラベルが追加されてから7日経過していたら、自動で閉じる
+          stale-pr-label: "no-pr-activity" # PRに「no-pr-activity」ラベルを付ける このラベルが追加されてから7日経過していたら、自動で閉じる
