@@ -17,10 +17,10 @@ jobs:
       - name: Notify CI Error
         uses: 8398a7/action-slack@v3
         with:
-          status: ${{ job.status }}
+          status: ${{ github.event.workflow_run.conclusion }}
           author_name: プルリクエスト時のCI処理結果
           fields: repo,message,commit,author,action,job,took,eventName,ref,workflow
-          mention: "subteam^U01HWP9SJDP" # 追加
+          mention: "@U01HWP9SJDP" # 追加
           if_mention: failure # 追加
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
