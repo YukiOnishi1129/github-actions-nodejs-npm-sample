@@ -9,7 +9,7 @@ on:
 
 jobs:
   slack:
-    #if: github.event.workflow_run.conclusion == 'failure' # ③ if: 指定した条件を満たした時だけジョブを実行する
+    if: github.event.workflow_run.conclusion == 'failure' # ③ if: 指定した条件を満たした時だけジョブを実行する
     # github.event.workflow_run.conclusion == 'failure': ワークフローが失敗した時だけジョブが実行
     runs-on: ubuntu-latest
     steps:
@@ -20,7 +20,7 @@ jobs:
           status: ${{ job.status }}
           author_name: プルリクエスト時のCI処理結果
           fields: repo,message,commit,author,action,job,took,eventName,ref,workflow
-          mention: "yuki" # 追加
+          mention: "subteam^U01HWP9SJDP" # 追加
           if_mention: failure # 追加
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
